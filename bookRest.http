@@ -1,0 +1,13 @@
+###
+curl -X GET "http://localhost:4000/api"
+
+###
+curl -X POST "http://localhost:4000/api/book" \
+-H "Content-Type: application/json" \
+-d '{
+  "code": "code-123",
+  "title": "book title",
+  "author": "ahmad",
+  "stock": 10
+}'
+
