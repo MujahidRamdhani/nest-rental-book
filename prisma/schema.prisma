@@ -17,7 +17,7 @@ model Member {
   code        String   @id @unique
   name        String
   borrowings  Borrowing[]
-  penaltyUntil DateTime? 
+  penaltys     Penalty[]
 }
 
 model Book {
@@ -34,9 +34,19 @@ model Borrowing {
   bookCode   String
   borrowedAt DateTime @default(now())
   returnedAt DateTime?
-  penalty    Boolean  @default(false)
   stock_retreived Boolean  @default(false)
-  
   member Member @relation(fields: [memberCode], references: [code])
   book   Book   @relation(fields: [bookCode], references: [code])
+  penaltys     Penalty[]
+}
+
+model Penalty {
+  id          String   @id @default(uuid())
+  memberCode    String
+  borrowingCode String  @unique
+  issuedAt    DateTime @default(now())
+  expiresAt   DateTime
+
+  member    Member    @relation(fields: [memberCode], references: [code])
+  borrowing Borrowing @relation(fields: [borrowingCode], references: [id])
 }
