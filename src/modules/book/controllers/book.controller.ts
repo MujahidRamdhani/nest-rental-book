@@ -37,18 +37,8 @@ export class BookController {
 
   @Post('/')
   async create(@Body() data: CreateBookDto) {
-    // console.log("debug", data);
     return this.bookService.create(data);
   }
 
-  @Patch(':code')
-  async update(@Param('code') code: string, @Body() data: UpdateBookDto) {
-    return this.bookService.update(code, data);
-  }
-
-  @Delete(':code')
-  async destroy(@Param('code') code: string) {
-    return this.bookService.destroy(code);
-  }
 
 }

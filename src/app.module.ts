@@ -15,6 +15,7 @@ import { SharedModule } from './shared/shared.module';
 
 import { TrpcPanelController } from './shared/trpc-panel/trpc-panel.controller';
 import { BookModule } from './modules/book/book.module';
+import { MemberModule } from './modules/member/member.module';
 
 @Module({
   imports: [
@@ -46,6 +47,7 @@ import { BookModule } from './modules/book/book.module';
     TerminusModule,
     SharedModule,
     BookModule,
+    MemberModule,
   ],
   controllers: [AppController, TrpcPanelController],
   providers: [AppService],

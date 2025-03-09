@@ -15,14 +15,6 @@ export class BookService {
         return this.bookRepository.create(data);
     }
 
-    async update( code: string, data: UpdateBookDto) {
-        return this.bookRepository.update(code, data);
-    }
-
-    async destroy(code: string) {
-        return this.bookRepository.destroy(code);
-    }
-
     async findOneByCode(code: string) {
         return this.bookRepository.findOneByCode(code);
     }
