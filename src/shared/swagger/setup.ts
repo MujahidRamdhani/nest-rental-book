@@ -1,30 +1,27 @@
-import * as fs from 'fs';
-
+import fs from 'fs/promises'; // Menggunakan fs/promises untuk async writing
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-
-import { SettingService } from '@/shared/services/setting.service';
+import { INestApplication } from '@nestjs/common';
 import { ISwaggerConfigInterface } from '@/interfaces/swagger.interface';
-import { NestApplication } from '@nestjs/core';
 
-export function setupSwagger(
-  app: NestApplication,
-  config: ISwaggerConfigInterface,
-) {
-  const configService = new SettingService();
+export async function setupSwagger(app: INestApplication, config: ISwaggerConfigInterface) {
+  const baseUrl = config.baseUrl?.replace(/\/$/, '') || 'http://localhost:4000'; 
+
   const options = new DocumentBuilder()
     .setTitle(config.title)
     .setDescription(config.description)
     .setVersion(config.version)
-    .addServer(configService.app.url + '/api')
-    .setContact('Sociolite', 'https://sociolite.id', 'hello@sociolite.id')
+    .addServer(`${baseUrl}/api`)
     .setLicense('MIT', 'https://opensource.org/licenses/MIT')
-    .setVersion('1.0')
-    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, options);
 
-  fs.writeFileSync('./swagger-spec.json', JSON.stringify(document));
+  try {
+    await fs.writeFile('./swagger-spec.json', JSON.stringify(document, null, 2));
+    console.log('✅ Swagger spec saved successfully.');
+  } catch (error) {
+    console.error('❌ Error saving Swagger spec:', error);
+  }
 
   SwaggerModule.setup(config.path, app, document);
 }

@@ -13,9 +13,10 @@ export class MemberService {
     }
 
     async create(data: CreateMemberDto) {
+        const member = await this.memberRepository.findOneByCode(data.code);
+        if (member) throw new Error('Code Member already exists');
         return this.memberRepository.create(data);
     }
-
 
     async findOneByCode(code: string) {
         return this.memberRepository.findOneByCode(code);

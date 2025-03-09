@@ -27,26 +27,31 @@ model Book {
   stock     Int
   borrowings Borrowing[]
 }
+enum BorrowingStatus {
+  BORROWED
+  RETURNED
+}
 
 model Borrowing {
-  id         String   @id @default(uuid())
-  memberCode String
-  bookCode   String
-  borrowedAt DateTime @default(now())
-  returnedAt DateTime?
-  stock_retreived Boolean  @default(false)
-  member Member @relation(fields: [memberCode], references: [code])
-  book   Book   @relation(fields: [bookCode], references: [code])
-  penaltys     Penalty[]
+  id              String   @id @default(uuid())
+  memberCode      String
+  bookCode        String
+  borrowedAt      DateTime @default(now())
+  returnedAt      DateTime?
+  status          BorrowingStatus @default(BORROWED) 
+  
+  member          Member @relation(fields: [memberCode], references: [code])
+  book            Book   @relation(fields: [bookCode], references: [code])
+  penaltys        Penalty[]
 }
 
 model Penalty {
   id          String   @id @default(uuid())
-  memberCode    String
-  borrowingCode String  @unique
+  memberCode  String
+  borrowingId String   @unique
   issuedAt    DateTime @default(now())
   expiresAt   DateTime
 
   member    Member    @relation(fields: [memberCode], references: [code])
-  borrowing Borrowing @relation(fields: [borrowingCode], references: [id])
+  borrowing Borrowing @relation(fields: [borrowingId], references: [id])
 }

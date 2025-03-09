@@ -10,6 +10,7 @@ import { MemberRepository } from "./repositories/member.repository";
     controllers: [
         MemberController,
     ],
-    providers: [MemberService, MemberRepository]
+    providers: [MemberService, MemberRepository],
+    exports: [MemberService]
 })
 export class MemberModule { }

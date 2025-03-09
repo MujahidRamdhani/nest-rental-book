@@ -6,4 +6,5 @@ export interface ISwaggerConfigInterface {
   description?: string;
   version: string;
   scheme: 'http' | 'https';
+  baseUrl?: string;
 }

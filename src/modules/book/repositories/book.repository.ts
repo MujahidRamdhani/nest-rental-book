@@ -1,7 +1,7 @@
 import { PrismaService } from '@/shared/prisma/prisma.service';
 
 import { Injectable } from '@nestjs/common';
-import { CreateBookDto, UpdateBookDto } from '../dtos/create.dto';
+import { CreateBookDto} from '../dtos/create.dto';
 
 @Injectable()
 export class BookRepository {
@@ -29,4 +29,18 @@ export class BookRepository {
       throw error;
     }
   }
+
+  async updateStock(code: string, stock: number) {
+    try {
+      return await this.prisma.$transaction([
+        this.prisma.book.update({ where: { code }, data: { stock } }),
+      ]);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+
+
+
 }

@@ -1,0 +1,55 @@
+###
+curl -X GET "http://localhost:4000/api"
+
+###
+curl -X POST "http://localhost:4000/api/book" \
+-H "Content-Type: application/json" \
+-d '{
+  "code": "code-991",
+  "title": "Mysteries of the Universe",
+  "author": "Albert Newton",
+  "stock": 10
+}'
+
+###
+curl -X Get "http://localhost:4000/api/book/code-991" \
+-H "Content-Type: application/json" \
+
+###
+curl -X Get "http://localhost:4000/api/book/"\
+-H "Content-Type: application/json" \
+
+###
+curl -X POST "http://localhost:4000/api/member" \
+-H "Content-Type: application/json" \
+-d '{
+  "code": "code-011",
+  "name": "mujahid"
+}'
+
+###
+curl -X GET "http://localhost:4000/api/member/code-001" \
+-H "Content-Type: application/json" \
+
+###
+curl -X POST "http://localhost:4000/api/borrowing" \
+-H "Content-Type: application/json" \
+-d '{
+  "memberCode": "code-011",
+  "bookCode": "code-122"
+}'
+
+###
+curl -X PUT "http://localhost:4000/api/borrowing/61b36a04-4ee8-4854-bb64-70dda723db2d" \
+-H "Content-Type: application/json" \
+
+
+###
+curl -X GET "http://localhost:4000/api/borrowing" \
+-H "Content-Type: application/json" \
+
+
+
+
+
+

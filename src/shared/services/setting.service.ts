@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv';
 import * as winston from 'winston';
-import * as DailyRotateFile from 'winston-daily-rotate-file';
+import DailyRotateFile from 'winston-daily-rotate-file';
 import { LogLevel } from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -233,11 +233,12 @@ export class SettingService {
   get swaggerConfig(): ISwaggerConfigInterface {
     return {
       path: this.get('SWAGGER_PATH') || '/api/docs',
-      title: this.get('SWAGGER_TITLE') || 'Sociolite API ',
+      title: this.get('SWAGGER_TITLE') || 'Books API', 
       description:
-        this.get('SWAGGER_DESCRIPTION') || 'Sociolite API Documentation',
+        this.get('SWAGGER_DESCRIPTION') || 'Books API Documentation',
       version: this.get('SWAGGER_VERSION') || '0.0.1',
       scheme: this.get('SWAGGER_SCHEME') === 'https' ? 'https' : 'http',
+      baseUrl: this.get('SWAGGER_BASE_URL') || 'http://localhost:4000',
     };
   }
 

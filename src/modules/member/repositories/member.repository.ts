@@ -13,7 +13,6 @@ export class MemberRepository {
 
   async create(data: CreateMemberDto) {
     try {
-     
       return await this.prisma.$transaction([
         this.prisma.member.create({ data }),
       ]);
