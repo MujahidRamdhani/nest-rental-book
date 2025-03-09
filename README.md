@@ -1,3 +1,6 @@
+## ERD
+![response](image/erd-book.png)
+
 ## Entities
 
 - Member
@@ -6,7 +9,7 @@
 ## Use Case
 
 - Members can borrow books with conditions
-    - [ok]  Members may not borrow more than 2 books
+    - [ ]  Members may not borrow more than 2 books
     - [ ]  Borrowed books are not borrowed by other members
     - [ ]  Member is currently not being penalized
 - Member returns the book with conditions
